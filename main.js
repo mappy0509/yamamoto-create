@@ -1,115 +1,42 @@
 /* YAMAMOTO CREATE ポートフォリオサイト 共通スクリプト */
 
-// --- Main Page Logic ---
-// AOS initialization
-AOS.init({ duration: 700, once: true });
+// --- Initialization called by common.js ---
 
-// Header scroll effect
-const header = document.getElementById('main-header');
-if (header) {
-    window.addEventListener('scroll', () => {
-        // Only apply transparent-to-white effect on the main page (where hero section exists)
-        if (document.getElementById('hero')) {
-             header.classList.toggle('scrolled', window.scrollY > 50);
+// Initializes header logic (scroll effects, etc.)
+function initializeHeader() {
+    const header = document.getElementById('main-header');
+    if (!header) return;
+
+    const isHomePage = !!document.getElementById('hero');
+    const navLinks = header.querySelectorAll('.nav-link');
+
+    function updateHeaderStyle() {
+        const isScrolled = window.scrollY > 50;
+        if (isHomePage) {
+            header.classList.toggle('scrolled', isScrolled);
+        } else {
+            header.classList.add('scrolled');
         }
-    });
-}
-
-
-// Loading animation and Typing animation (only for main page)
-const loader = document.getElementById('loader');
-const heroTitle = document.getElementById('hero-title');
-
-if (loader && heroTitle) {
-    window.addEventListener('load', () => {
-        loader.classList.add('hidden');
-        setTimeout(startTypingAnimation, 500); 
-    });
-} else if (loader) {
-    // Hide loader immediately on subpages without hero animation
-    window.addEventListener('load', () => {
-        loader.classList.add('hidden');
-    });
-}
-
-
-// Hero section typing animation
-function startTypingAnimation() {
-    const titleElement = document.getElementById('hero-title');
-    // Exit if the hero title element is not on the page
-    if (!titleElement) return; 
-
-    const englishText = 'Technology To Embody Ideas';
-    const japaneseText = 'アイデアを<br class="md:hidden">カタチにする技術';
-    const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    
-    // Animation Sequence
-    type(englishText, 100, () => {
-        setTimeout(() => {
-            scramble(500, () => {
-                type(japaneseText, 150, () => {
-                    const cursor = titleElement.querySelector('.typing-cursor');
-                    if(cursor) setTimeout(() => cursor.remove(), 1400);
-                });
-            });
-        }, 800);
-    });
-
-    function type(text, speed, callback) {
-        let i = 0;
-        titleElement.innerHTML = '';
-        const cursorSpan = document.createElement('span');
-        cursorSpan.className = 'typing-cursor';
-        titleElement.appendChild(cursorSpan);
-
-        function typeChar() {
-            if (i < text.length) {
-                // Correctly handle any HTML tag starting with '<'
-                if (text.charAt(i) === '<') {
-                     const tagEnd = text.indexOf('>', i);
-                     const tag = text.substring(i, tagEnd + 1);
-                     cursorSpan.insertAdjacentHTML('beforebegin', tag);
-                     i = tagEnd + 1;
-                } else {
-                    const char = text.slice(i, i + 1);
-                    cursorSpan.insertAdjacentHTML('beforebegin', char);
-                    i++;
-                }
-                setTimeout(typeChar, speed);
-            } else {
-                if (callback) callback();
-            }
-        }
-        typeChar();
     }
 
-    function scramble(duration, callback) {
-        const originalHTML = titleElement.innerHTML;
-        const textContent = titleElement.textContent;
-        const textLength = textContent.length;
-        let scrambleInterval = setInterval(() => {
-            let scrambledText = '';
-            for (let j = 0; j < textLength; j++) {
-                scrambledText += scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
-            }
-            // Keep cursor, only change text node
-            if(titleElement.firstChild && titleElement.firstChild.nodeType === 3) {
-               titleElement.firstChild.textContent = scrambledText;
-            }
-        }, 50);
-
-        setTimeout(() => {
-            clearInterval(scrambleInterval);
-            titleElement.innerHTML = originalHTML;
-            if (callback) callback();
-        }, duration);
+    // Set initial state based on page type
+    if (!isHomePage) {
+        header.classList.add('scrolled');
+        navLinks.forEach(link => {
+            link.classList.remove('text-white', 'hover:text-gray-300');
+            link.classList.add('text-gray-600', 'hover:text-gray-900');
+        });
+        header.querySelector('.logo-link').classList.remove('text-white');
+        header.querySelector('.logo-link').classList.add('text-gray-800');
     }
+
+    window.addEventListener('scroll', updateHeaderStyle);
+    updateHeaderStyle(); // Run on initial load
 }
 
 
-// --- AI Chatbot Logic (runs on all pages) ---
-const chatContainer = document.getElementById('chat-container');
-if (chatContainer) {
+// Initializes all chatbot functionalities
+function initializeChatbot() {
     const chatBubble = document.getElementById('chat-bubble');
     const chatWidget = document.getElementById('chat-widget');
     const closeWidget = document.getElementById('close-widget');
@@ -117,6 +44,8 @@ if (chatContainer) {
     const chatInput = document.getElementById('chat-input');
     const sendButton = document.getElementById('send-button');
     const typingIndicator = document.getElementById('typing-indicator');
+
+    if (!chatBubble) return; // Exit if chat elements are not loaded
 
     const toggleWidget = (isOpen) => {
         if (isOpen) {
@@ -184,6 +113,95 @@ if (chatContainer) {
             console.error("Fetch Error:", error);
             return "申し訳ありません、接続に問題が発生しました。";
         }
+    }
+}
+
+// --- Page-Specific Logic ---
+// AOS initialization
+AOS.init({ duration: 700, once: true });
+
+// Loading animation and Typing animation (only for main page)
+const loader = document.getElementById('loader');
+if (loader) {
+    if (document.getElementById('hero-title')) {
+        window.addEventListener('load', () => {
+            loader.classList.add('hidden');
+            setTimeout(startTypingAnimation, 500); 
+        });
+    } else {
+        window.addEventListener('load', () => {
+            loader.classList.add('hidden');
+        });
+    }
+}
+
+// Hero section typing animation
+function startTypingAnimation() {
+    const titleElement = document.getElementById('hero-title');
+    if (!titleElement) return;
+
+    const englishText = 'Technology To Embody Ideas';
+    const japaneseText = 'アイデアを<br class="md:hidden">カタチにする技術';
+    const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    
+    // Animation Sequence
+    type(englishText, 100, () => {
+        setTimeout(() => {
+            scramble(500, () => {
+                type(japaneseText, 150, () => {
+                    const cursor = titleElement.querySelector('.typing-cursor');
+                    if(cursor) setTimeout(() => cursor.remove(), 1400);
+                });
+            });
+        }, 800);
+    });
+
+    function type(text, speed, callback) {
+        let i = 0;
+        titleElement.innerHTML = '';
+        const cursorSpan = document.createElement('span');
+        cursorSpan.className = 'typing-cursor';
+        titleElement.appendChild(cursorSpan);
+
+        function typeChar() {
+            if (i < text.length) {
+                if (text.charAt(i) === '<') {
+                     const tagEnd = text.indexOf('>', i);
+                     const tag = text.substring(i, tagEnd + 1);
+                     cursorSpan.insertAdjacentHTML('beforebegin', tag);
+                     i = tagEnd + 1;
+                } else {
+                    const char = text.slice(i, i + 1);
+                    cursorSpan.insertAdjacentHTML('beforebegin', char);
+                    i++;
+                }
+                setTimeout(typeChar, speed);
+            } else {
+                if (callback) callback();
+            }
+        }
+        typeChar();
+    }
+
+    function scramble(duration, callback) {
+        const originalHTML = titleElement.innerHTML;
+        const textContent = titleElement.textContent;
+        const textLength = textContent.length;
+        let scrambleInterval = setInterval(() => {
+            let scrambledText = '';
+            for (let j = 0; j < textLength; j++) {
+                scrambledText += scrambleChars.charAt(Math.floor(Math.random() * scrambleChars.length));
+            }
+            if(titleElement.firstChild && titleElement.firstChild.nodeType === 3) {
+               titleElement.firstChild.textContent = scrambledText;
+            }
+        }, 50);
+
+        setTimeout(() => {
+            clearInterval(scrambleInterval);
+            titleElement.innerHTML = originalHTML;
+            if (callback) callback();
+        }, duration);
     }
 }
 

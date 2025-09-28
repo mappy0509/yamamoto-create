@@ -1,0 +1,41 @@
+<!-- Footer -->
+<div class="border-t border-gray-200">
+    <div class="container mx-auto px-6 py-4">
+        <p class="text-center text-sm text-gray-500">&copy; 2025 YAMAMOTO CREATE. All Rights Reserved.</p>
+    </div>
+</div>
+
+<!-- Chat Widget Container -->
+<div id="chat-container" class="fixed bottom-5 right-5 z-50">
+    <button id="chat-bubble" class="bg-gray-800 text-white w-16 h-16 rounded-full flex items-center justify-center">
+        <i class="fas fa-comments text-2xl"></i>
+    </button>
+    <div id="chat-widget" class="absolute bottom-[80px] right-0 w-[calc(100vw-40px)] sm:w-[350px] max-w-[350px] h-[500px] bg-white rounded-lg shadow-2xl flex flex-col transform scale-95 opacity-0 pointer-events-none">
+        <div class="bg-gray-800 text-white p-4 rounded-t-lg flex justify-between items-center">
+            <div>
+                <h3 class="font-bold text-lg">AI Assistant</h3>
+                <p class="text-xs opacity-80">Yamamoto Createについて質問する</p>
+            </div>
+            <button id="close-widget" class="text-white hover:opacity-75"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        <div id="chat-history" class="flex-1 p-4 overflow-y-auto">
+            <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-gray-700 text-white rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-comment-dots"></i></div>
+                <div class="message-bubble-ai p-3 rounded-lg max-w-xs">
+                    <p class="text-sm">こんにちは！ Yamamoto CreateのAIアシスタントです。スキルや実績について、お気軽にご質問ください。</p>
+                </div>
+            </div>
+        </div>
+        <div id="typing-indicator" class="p-4 hidden items-center gap-3">
+             <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-comment-dots text-gray-600"></i></div>
+             <div class="typing-indicator"><span class="dot1"></span><span class="dot2"></span><span class="dot3"></span></div>
+        </div>
+        <div class="border-t border-gray-200 p-4">
+            <div class="flex items-center bg-gray-100 rounded-full">
+                <input type="text" id="chat-input" placeholder="メッセージを入力..." class="flex-1 bg-transparent px-4 py-2 text-sm focus:outline-none">
+                <button id="send-button" class="px-4 text-gray-600 hover:text-gray-900"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
