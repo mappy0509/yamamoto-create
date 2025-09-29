@@ -98,11 +98,10 @@ function initializeChatbot() {
 
     async function callGeminiApi(userMessage) {
         // ▼▼▼ ここにAPIキーを設定 ▼▼▼
-        // Google AI Studioで取得したご自身のAPIキーを貼り付けてください。
         const apiKey = "AIzaSyBJNVon1cBiT3CrZgaqcFjwCfDRR_SVZZY"; 
         // ▲▲▲ ここにAPIキーを設定 ▲▲▲
 
-        if (apiKey === "AIzaSyBJNVon1cBiT3CrZgaqcFjwCfDRR_SVZZY") {
+        if (apiKey === "YOUR_API_KEY_HERE") {
             return "APIキーが設定されていません。main.jsファイルにAPIキーを設定してください。";
         }
 
