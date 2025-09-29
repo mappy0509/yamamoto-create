@@ -1,6 +1,9 @@
 /* YAMAMOTO CREATE ポートフォリオサイト 共通スタイル */
 
 /* Custom Styles for minimalist design */
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scroll, fixing the chat icon position bug */
+}
 html {
     scroll-behavior: smooth;
 }
@@ -9,7 +12,6 @@ body {
     font-weight: 300; /* Use the thin font weight */
     background-color: #f9fafb; /* Slightly off-white for a softer look */
     color: #374151; /* Dark gray for text */
-    overflow-x: hidden; /* Prevent horizontal scroll, fixing the chat icon position bug */
 }
 /* Custom heading styles */
 h1, h2, h3, h4, h5, h6 {
