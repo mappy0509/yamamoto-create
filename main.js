@@ -26,8 +26,11 @@ function initializeHeader() {
             link.classList.remove('text-white', 'hover:text-gray-300');
             link.classList.add('text-gray-600', 'hover:text-gray-900');
         });
-        header.querySelector('.logo-link').classList.remove('text-white');
-        header.querySelector('.logo-link').classList.add('text-gray-800');
+        const logoLink = header.querySelector('.logo-link');
+        if (logoLink) {
+            logoLink.classList.remove('text-white');
+            logoLink.classList.add('text-gray-800');
+        }
     }
 
     window.addEventListener('scroll', updateHeaderStyle);
@@ -94,11 +97,21 @@ function initializeChatbot() {
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendMessage(); });
 
     async function callGeminiApi(userMessage) {
-        const systemPrompt = `あなたは "YAMAMOTO CREATE" というWebデベロッパーのポートフォリオサイト専門の、優秀なAIアシスタントです。あなたの目的は、下記の情報を基に、サイト訪問者からの質問に回答することです。フレンドリーかつプロフェッショナルな口調で、簡潔に回答してください。 **ルール:** - 提供された情報にない質問をされた場合は、「申し訳ありませんが、その情報については分かりかねます。Yamamoto Createのスキルや実績に関するご質問でしたらお答えできます。」と丁寧に回答してください。 - 料金や契約に関する具体的な質問には答えず、「ありがとうございます。料金やご契約に関するご相談は、CONTACTページから直接お問い合わせいただけますでしょうか。」と誘導してください。 - 常に日本語で回答してください。 --- **[提供情報]** **1. デベロッパー情報:** - 名前: Yamamoto - 拠点: 福岡 - 役割: Webデベロッパー - 特徴: ReactやFirebaseを用いたモダンなWebアプリ開発、成果に直結するLP制作、Gemini APIを組み込んだAIチャットボット開発など、幅広い技術領域に対応。ミニマルで洗練されたデザインと、直感的なUI/UXを得意とする。 **2. スキル:** - フロントエンド: React, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, レスポンシブデザイン - バックエンド & BaaS: Firebase (Firestore, Authentication), サーバーレスアーキテクチャ - AI連携: Google AI (Gemini API) を活用したAIチャットボット開発 - ライブラリ & ツール: AOS.js, Swiper.js, Google Tag Manager **3. 実績プロジェクト (WORKS):** - **選手＆コーチ向けスキルアップアプリ:** バスケ選手の成長を可視化するWebアプリ。使用技術はReact, Firebase, Tailwind CSS。 - **AIチャット搭載 顧客向けアプリ:** Gemini APIを統合し24時間顧客対応するサロン専用アプリ。使用技術はGemini API, Firebase, JavaScript。 - **ミニバスチーム公式サイト:** JSライブラリで豊かなアニメーションを実現したチームサイト。使用技術はJavaScript, AOS.js, Swiper.js。 - **不動産SNS運用代行LP:** コンバージョンを最大化するマーケティングLP。使用技術はHTML/CSS, JavaScript, GTM。 - **ウォーキングサロンLP:** 洗練されたデザインで体験レッスンへ誘導するLP。使用技術はHTML/CSS, Tailwind CSS, JavaScript。 ---`;
+        // ▼▼▼ ここにAPIキーを設定 ▼▼▼
+        // Google AI Studioで取得したご自身のAPIキーを貼り付けてください。
+        const apiKey = "AIzaSyBJNVon1cBiT3CrZgaqcFjwCfDRR_SVZZY"; 
+        // ▲▲▲ ここにAPIキーを設定 ▲▲▲
+
+        if (apiKey === "AIzaSyBJNVon1cBiT3CrZgaqcFjwCfDRR_SVZZY") {
+            return "APIキーが設定されていません。main.jsファイルにAPIキーを設定してください。";
+        }
+
+        const systemPrompt = `あなたは "YAMAMOTO CREATE" というWebデベロッパーのポートフォリオサイト専門の、優秀なAIアシスタントです。あなたの目的は、下記の情報を基に、サイト訪問者からの質問に回答することです。フレンドリーかつプロフェッショナルな口調で、簡潔に回答してください。 **ルール:** - 提供された情報にない質問をされた場合は、「申し訳ありませんが、その情報については分かりかねます。Yamamoto Createのスキルや実績に関するご質問でしたらお答えできます。」と丁寧に回答してください。 - 料金や契約に関する具体的な質問には答えず、「ありがとうございます。料金やご契約に関するご相談は、CONTACTページから直接お問い合わせいただけますでしょうか。」と誘導してください。 - 常に日本語で回答してください。 --- **[提供情報]** **1. デベロッパー情報:** - 名前: masahiro yamamoto - 拠点: 福岡 - 役割: Webデベロッパー - 特徴: ReactやFirebaseを用いたモダンなWebアプリ開発、成果に直結するLP制作、Gemini APIを組み込んだAIチャットボット開発など、幅広い技術領域に対応。ミニマルで洗練されたデザインと、直感的なUI/UXを得意とする。 **2. スキル:** - フロントエンド: React, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, レスポンシブデザイン - バックエンド & BaaS: Firebase (Firestore, Authentication), サーバーレスアーキテクチャ - AI連携: Google AI (Gemini API) を活用したAIチャットボット開発 - ライブラリ & ツール: AOS.js, Swiper.js, Google Tag Manager **3. 実績プロジェクト (WORKS):** - **選手＆コーチ向けスキルアップアプリ:** バスケ選手の成長を可視化するWebアプリ。使用技術はReact, Firebase, Tailwind CSS。 - **AIチャット搭載 顧客向けアプリ:** Gemini APIを統合し24時間顧客対応するサロン専用アプリ。使用技術はGemini API, Firebase, JavaScript。 - **ミニバスチーム公式サイト:** JSライブラリで豊かなアニメーションを実現したチームサイト。使用技術はJavaScript, AOS.js, Swiper.js。 - **不動産SNS運用代行LP:** コンバージョンを最大化するマーケティングLP。使用技術はHTML/CSS, JavaScript, GTM。 ---`;
         conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
-        const apiKey = "";
+        
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
         const payload = { contents: conversationHistory, systemInstruction: { parts: [{ text: systemPrompt }] } };
+        
         try {
             const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             if (!response.ok) {
