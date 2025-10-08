@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yamamoto create | Portfolio</title>
     
-    <!-- External CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,24 +12,19 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
 
-    <!-- Loading Animation -->
     <div id="loader" class="fixed inset-0 bg-white z-[100] flex items-center justify-center">
         <div id="loader-bar-container">
             <div id="loader-bar"></div>
         </div>
     </div>
 
-    <!-- Header will be loaded here by common.js -->
     <header id="main-header" class="w-full sticky top-0 z-50"></header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="relative -mt-[68px] h-screen flex items-center justify-center bg-gray-800 text-white text-center" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto-format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed;">
             <div class="absolute inset-0 bg-black/50"></div>
             <div class="relative z-10 px-6">
@@ -43,56 +37,50 @@
         </section>
 
 
-        <!-- Works Section -->
         <section id="works" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-center" data-aos="fade-up">WORKS</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                    <!-- Project 1 -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up">
                         <img src="img/dunks-screenshot1.png" alt="選手＆コーチ向けスキルアップアプリのサムネイル" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-lg font-bold text-gray-800">選手＆コーチ向けスキルアップアプリ</h3>
-                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">選手とコーチが連携し、日々の成長をリアルタイムに可視化するスキルアップ支援アプリ。安全なログイン機能や動的なデータ管理機能を搭載しています。</p>
+                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">選手とコーチが連携し、日々の成長をリアルタイムに可視化するスキルアップ支援アプリ。</p>
                             <div class="mt-4 flex flex-wrap gap-2"><span class="tag">React</span><span class="tag">Firebase</span><span class="tag">Tailwind CSS</span></div>
                              <a href="work-dunks-app.html" class="inline-block mt-5 text-center bg-gray-800 text-white font-bold text-xs tracking-wider py-2 px-5 rounded-full hover:bg-gray-700 transition-colors">詳細を見る</a>
                         </div>
                     </div>
-                    <!-- Project 2 -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="100">
                         <img src="img/salon-screenshot1.png" alt="AIチャット搭載 顧客向けアプリのサムネイル" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-lg font-bold text-gray-800">AIチャット搭載 顧客向けアプリ</h3>
-                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">最新の生成AIを連携させた、24時間対応の自動応答チャットが特徴。顧客管理や予約機能も備えたサロン専用の高機能アプリケーションです。</p>
+                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">最新の生成AIを連携させた、24時間対応の自動応答チャットが特徴のサロン専用アプリ。</p>
                             <div class="mt-4 flex flex-wrap gap-2"><span class="tag">Gemini API</span><span class="tag">Firebase</span><span class="tag">JavaScript</span></div>
                              <a href="work-salon-app.html" class="inline-block mt-5 text-center bg-gray-800 text-white font-bold text-xs tracking-wider py-2 px-5 rounded-full hover:bg-gray-700 transition-colors">詳細を見る</a>
                         </div>
                     </div>
-                    <!-- Project 3 -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="200">
                         <img src="img/website-screenshot1.png" alt="ミニバスチーム公式サイトのサムネイル" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-lg font-bold text-gray-800">ミニバスチーム公式サイト</h3>
-                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">JSライブラリを駆使した豊かなアニメーションが特徴。チームの魅力を伝え、新メンバーとスポンサーを募る公式サイト。</p>
+                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">JSライブラリを駆使した豊かなアニメーションが特徴のチーム公式サイト。</p>
                             <div class="mt-4 flex flex-wrap gap-2"><span class="tag">JavaScript</span><span class="tag">AOS.js</span><span class="tag">Swiper.js</span></div>
                             <a href="work-website.html" class="inline-block mt-5 text-center bg-gray-800 text-white font-bold text-xs tracking-wider py-2 px-5 rounded-full hover:bg-gray-700 transition-colors">詳細を見る</a>
-                        </div>
-                    </div>
-                    <!-- Project 4 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up">
-                        <img src="img/lp-realestate-screenshot1.png" alt="不動産SNS運用代行LPのサムネイル" class="w-full h-48 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-lg font-bold text-gray-800">不動産SNS運用代行LP</h3>
-                            <p class="mt-2 text-sm text-gray-600 leading-relaxed flex-grow">コンバージョンを最大化するロジカルな構成。見込み客獲得に特化した、マーケティング戦略に基づいたLP。</p>
-                            <div class="mt-4 flex flex-wrap gap-2"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">GTM</span></div>
-                            <a href="work-lp-realestate.html" class="inline-block mt-5 text-center bg-gray-800 text-white font-bold text-xs tracking-wider py-2 px-5 rounded-full hover:bg-gray-700 transition-colors">詳細を見る</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Profile Section -->
+        <section id="news" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-center" data-aos="fade-up">NEWS</h2>
+                <div id="news-list" class="max-w-4xl mx-auto space-y-2">
+                    <p class="text-center text-gray-500">読み込み中...</p>
+                </div>
+                </div>
+        </section>
+
         <section id="profile" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-center" data-aos="fade-up">PROFILE</h2>
@@ -113,45 +101,17 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-center" data-aos="fade-up">SKILLS</h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                        <div data-aos="fade-up"><h3 class="text-lg font-bold text-gray-800 mb-2">Frontend</h3><p class="text-gray-600">React, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, レスポンシブデザイン</p></div>
-                        <div data-aos="fade-up" data-aos-delay="100"><h3 class="text-lg font-bold text-gray-800 mb-2">Backend & BaaS</h3><p class="text-gray-600">Firebase (Firestore, Authentication), サーバーレスアーキテクチャ</p></div>
-                        <div data-aos="fade-up"><h3 class="text-lg font-bold text-gray-800 mb-2">AI Integration</h3><p class="text-gray-600">Google AI (Gemini API) を活用したAIチャットボット開発</p></div>
-                        <div data-aos="fade-up" data-aos-delay="100"><h3 class="text-lg font-bold text-gray-800 mb-2">Libraries & Tools</h3><p class="text-gray-600">AOS.js, Swiper.js, Google Tag Manager</p></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </main>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="section-title text-center" data-aos="fade-up">CONTACT</h2>
-                <p class="max-w-xl mx-auto text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="100">
-                    ウェブサイト制作、アプリケーション開発のご相談など、<br>
-                    お気軽にお問い合わせください。
-                </p>
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <a href="mailto:contact@yamamoto-create.example.com" class="inline-block bg-gray-800 text-white font-bold tracking-wider py-3 px-8 rounded-full hover:bg-gray-700 transition-colors duration-300">MESSAGE</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer and Chatbot will be loaded here by common.js -->
     <footer id="footer-container"></footer>
     
-    <!-- External JS Libraries -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     
-    <!-- Your Custom Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="main.js" defer></script>
     <script src="common.js" defer></script>
+
 </body>
 </html>
-
