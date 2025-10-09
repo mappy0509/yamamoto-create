@@ -1,4 +1,5 @@
 /* YAMAMOTO CREATE ポートフォリオサイト 共通スクリプト */
+import { db, collection, getDocs, query, orderBy, limit } from './firebase-config.js';
 
 // --- Initialization called by common.js ---
 
@@ -130,7 +131,10 @@ function initializeChatbot() {
 
 // --- Page-Specific Logic ---
 // AOS initialization
-AOS.init({ duration: 700, once: true });
+if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 700, once: true });
+}
+
 
 // Loading animation and Typing animation (only for main page)
 const loader = document.getElementById('loader');
@@ -217,40 +221,56 @@ function startTypingAnimation() {
     }
 }
 
+
 // --- News Section Logic ---
-function loadLatestNews() {
+async function loadLatestNews() {
     const newsList = document.getElementById('news-list');
     if (!newsList) return;
 
-    db.collection('posts').orderBy('createdAt', 'desc').limit(5).get()
-        .then(snapshot => {
-            if (snapshot.empty) {
-                newsList.innerHTML = '<p class="text-center text-gray-500">お知らせはまだありません。</p>';
-                return;
-            }
-            let html = '';
-            snapshot.forEach(doc => {
-                const post = doc.data();
-                const postDate = post.createdAt.toDate().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
-                html += `
-                    <a href="blog-post.html?id=${doc.id}" 
-                       class="block border-b border-gray-200 py-4 px-2 hover:bg-gray-100 transition-colors duration-300" 
-                       data-aos="fade-up" data-aos-anchor="#news-list">
-                        <div class="flex flex-col sm:flex-row sm:items-center">
-                            <p class="text-sm text-gray-500 w-full sm:w-40 mb-1 sm:mb-0">${postDate}</p>
-                            <h3 class="text-gray-800 font-bold flex-1">${post.title}</h3>
-                            <span class="hidden sm:inline-block text-xs text-gray-400 ml-4 group-hover:text-gray-800 transition-colors">&rarr;</span>
-                        </div>
-                    </a>
-                `;
-            });
-            newsList.innerHTML = html;
-        })
-        .catch(error => {
-            console.error("Error getting news:", error);
-            newsList.innerHTML = '<p class="text-center text-red-500">記事の読み込みに失敗しました。</p>';
+    try {
+        const postsCollection = collection(db, 'posts');
+        const q = query(postsCollection, orderBy('createdAt', 'desc'), limit(5));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+            newsList.innerHTML = '<p class="text-center text-gray-500">お知らせはまだありません。</p>';
+            return;
+        }
+        
+        let html = '';
+        snapshot.forEach(doc => {
+            const post = doc.data();
+            const postDate = post.createdAt.toDate().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+            html += `
+                <a href="blog-post.html?id=${doc.id}" 
+                   class="block border-b border-gray-200 py-4 px-2 hover:bg-gray-100 transition-colors duration-300 group" 
+                   data-aos="fade-up" data-aos-anchor="#news-list">
+                    <div class="flex flex-col sm:flex-row sm:items-center">
+                        <p class="text-sm text-gray-500 w-full sm:w-40 mb-1 sm:mb-0">${postDate}</p>
+                        <h3 class="text-gray-800 font-bold flex-1 group-hover:text-gray-900">${post.title}</h3>
+                        <span class="hidden sm:inline-block text-xs text-gray-400 ml-4 group-hover:text-gray-800 transition-colors">&rarr;</span>
+                    </div>
+                </a>
+            `;
         });
+        newsList.innerHTML = html;
+
+    } catch (error) {
+        console.error("Error getting news:", error);
+        newsList.innerHTML = '<p class="text-center text-red-500">記事の読み込みに失敗しました。</p>';
+    }
 }
 
-// ページが読み込まれたらニュースを取得
-document.addEventListener('DOMContentLoaded', loadLatestNews);
+// --- Global Initializations ---
+// Defer initialization until the DOM is fully loaded.
+document.addEventListener('DOMContentLoaded', () => {
+    // These functions are defined in this file but might be called
+    // after external HTML (header, footer) is loaded by common.js.
+    // So we expose them globally.
+    window.initializeHeader = initializeHeader;
+    window.initializeChatbot = initializeChatbot;
+
+    // Load news on the main page.
+    loadLatestNews();
+});
+
