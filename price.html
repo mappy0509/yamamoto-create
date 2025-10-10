@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>料金シミュレーション | YAMAMOTO CREATE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A simple style for checked items */
+        input[type="checkbox"]:checked + label {
+            background-color: #e0f2fe; /* light-blue-100 */
+            border-color: #38bdf8; /* light-blue-400 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">料金シミュレーション</h1>
+            <p class="mt-2 text-gray-600">ご希望の項目にチェックを入れて、簡単にお見積もり額を確認できます。</p>
+        </header>
+
+        <div id="price-simulator" class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+            
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold border-b-2 border-sky-500 pb-2 mb-4">Step 1. 基本料金（必須）</h2>
+                <div class="item">
+                    <input type="checkbox" id="basic_fee" data-price="80000" data-name="基本料金" class="hidden" checked disabled>
+                    <label for="basic_fee" class="block p-4 border rounded-lg cursor-not-allowed bg-sky-100 border-sky-400">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">基本料金（プロジェクト着手金）</span>
+                            <span class="font-bold text-lg">¥80,000<span class="text-sm font-normal">～</span></span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">ヒアリング、企画設計、ワイヤーフレーム作成など、プロジェクトの土台作りにかかる費用です。</p>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                 <h2 class="text-2xl font-semibold border-b-2 border-sky-500 pb-2 mb-4">Step 2. 各種制作料金（オプション）</h2>
+                
+                 <h3 class="text-xl font-semibold mt-6 mb-2">デザイン制作</h3>
+                 <div class="space-y-3">
+                    <div class="item">
+                        <input type="checkbox" id="design_top" data-price="80000" data-name="トップページデザイン" class="hidden item-checkbox">
+                        <label for="design_top" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">トップページデザイン</span><span class="font-semibold">¥80,000</span></div>
+                        </label>
+                    </div>
+                     <div class="item p-4 border rounded-lg" id="subpage_design_item">
+                        <div class="flex justify-between items-center">
+                           <div>
+                                <input type="checkbox" id="design_sub_check" data-name="下層ページデザイン" class="mr-3 h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 item-checkbox">
+                                <label for="design_sub_check" class="font-medium">下層ページデザイン</label>
+                           </div>
+                           <div class="flex items-center space-x-2">
+                                <select id="design_sub_pages" data-price="20000" class="rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500" disabled>
+                                    <option value="1">1ページ</option>
+                                    <option value="2">2ページ</option>
+                                    <option value="3">3ページ</option>
+                                    <option value="4">4ページ</option>
+                                    <option value="5" selected>5ページ</option>
+                                    <option value="6">6ページ</option>
+                                    <option value="7">7ページ</option>
+                                    <option value="8">8ページ</option>
+                                    <option value="9">9ページ</option>
+                                    <option value="10">10ページ</option>
+                                </select>
+                                <span class="font-semibold text-right w-28">¥<span id="design_sub_total">100,000</span></span>
+                           </div>
+                        </div>
+                    </div>
+                 </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2">コーディング</h3>
+                 <div class="space-y-3">
+                    <div class="item">
+                        <input type="checkbox" id="coding_top" data-price="50000" data-name="トップページコーディング" class="hidden item-checkbox">
+                        <label for="coding_top" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">トップページコーディング</span><span class="font-semibold">¥50,000</span></div>
+                        </label>
+                    </div>
+                     <div class="item p-4 border rounded-lg" id="subpage_coding_item">
+                        <div class="flex justify-between items-center">
+                           <div>
+                                <input type="checkbox" id="coding_sub_check" data-name="下層ページコーディング" class="mr-3 h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 item-checkbox">
+                                <label for="coding_sub_check" class="font-medium">下層ページコーディング</label>
+                           </div>
+                           <div class="flex items-center space-x-2">
+                                <select id="coding_sub_pages" data-price="15000" class="rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500" disabled>
+                                    <option value="1">1ページ</option>
+                                    <option value="2">2ページ</option>
+                                    <option value="3">3ページ</option>
+                                    <option value="4">4ページ</option>
+                                    <option value="5" selected>5ページ</option>
+                                    <option value="6">6ページ</option>
+                                    <option value="7">7ページ</option>
+                                    <option value="8">8ページ</option>
+                                    <option value="9">9ページ</option>
+                                    <option value="10">10ページ</option>
+                                </select>
+                                <span class="font-semibold text-right w-28">¥<span id="coding_sub_total">75,000</span></span>
+                           </div>
+                        </div>
+                    </div>
+                 </div>
+
+                 <h3 class="text-xl font-semibold mt-6 mb-2">システム導入</h3>
+                 <div class="space-y-3">
+                    <div class="item">
+                        <input type="checkbox" id="system_cms" data-price="80000" data-name="WordPress等CMS導入" class="hidden item-checkbox">
+                        <label for="system_cms" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">WordPress等CMS導入</span><span class="font-semibold">¥80,000</span></div>
+                        </label>
+                    </div>
+                     <div class="item">
+                        <input type="checkbox" id="system_form" data-price="20000" data-name="お問い合わせフォーム設置" class="hidden item-checkbox">
+                        <label for="system_form" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">お問い合わせフォーム設置</span><span class="font-semibold">¥20,000</span></div>
+                        </label>
+                    </div>
+                 </div>
+
+                 <h3 class="text-xl font-semibold mt-6 mb-2">Webアプリ・AI開発</h3>
+                 <div class="space-y-3">
+                    <div class="item">
+                        <input type="checkbox" id="dev_frontend" data-price="400000" data-name="フロントエンド開発（React）" class="hidden item-checkbox">
+                        <label for="dev_frontend" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">フロントエンド開発（React）</span><span class="font-semibold">¥400,000</span></div>
+                        </label>
+                    </div>
+                     <div class="item">
+                        <input type="checkbox" id="dev_backend" data-price="300000" data-name="バックエンド開発（Firebase）" class="hidden item-checkbox">
+                        <label for="dev_backend" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">バックエンド開発（Firebase）</span><span class="font-semibold">¥300,000</span></div>
+                        </label>
+                    </div>
+                     <div class="item">
+                        <input type="checkbox" id="dev_ai" data-price="500000" data-name="AIチャットボット開発" class="hidden item-checkbox">
+                        <label for="dev_ai" class="block p-4 border rounded-lg cursor-pointer hover:border-sky-400 transition">
+                            <div class="flex justify-between items-center"><span class="font-medium">AIチャットボット開発</span><span class="font-semibold">¥500,000</span></div>
+                        </label>
+                    </div>
+                 </div>
+
+            </div>
+        </div>
+
+        <div class="sticky bottom-0 bg-white shadow-lg mt-8 p-4 border-t-4 border-sky-500 rounded-t-lg">
+            <div class="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-lg font-medium text-gray-600">概算お見積もり金額（税抜）</p>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900">¥<span id="total-price">80,000</span></p>
+                </div>
+                <button id="cta-button" class="w-full md:w-auto bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition shadow-md hover:shadow-lg">
+                    この内容で問い合わせする
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="price.js"></script>
+</body>
+</html>
