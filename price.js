@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             total += parseInt(codingSubPages.value, 10) * parseInt(codingSubPages.dataset.price, 10);
         }
         
-        // Format number with commas and update the display
         totalPriceElement.textContent = total.toLocaleString();
     }
 
@@ -56,8 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event listeners for sub-page design ---
     designSubCheck.addEventListener('change', () => {
         designSubPages.disabled = !designSubCheck.checked;
-        designSubItem.style.backgroundColor = designSubCheck.checked ? '#e0f2fe' : 'transparent';
-        designSubItem.style.borderColor = designSubCheck.checked ? '#38bdf8' : '#e5e7eb';
+        designSubItem.classList.toggle('checked', designSubCheck.checked);
         calculateTotal();
     });
     designSubPages.addEventListener('change', () => {
@@ -68,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event listeners for sub-page coding ---
     codingSubCheck.addEventListener('change', () => {
         codingSubPages.disabled = !codingSubCheck.checked;
-        codingSubItem.style.backgroundColor = codingSubCheck.checked ? '#e0f2fe' : 'transparent';
-        codingSubItem.style.borderColor = codingSubCheck.checked ? '#38bdf8' : '#e5e7eb';
+        codingSubItem.classList.toggle('checked', codingSubCheck.checked);
         calculateTotal();
     });
     codingSubPages.addEventListener('change', () => {
@@ -77,12 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateTotal();
     });
 
-    // --- Add event listener to the CTA button ---
+    // --- CTA button ---
     ctaButton.addEventListener('click', () => {
         // !!! IMPORTANT: Change this to your actual email address !!!
-        const yourEmail = 'your-email@example.com'; 
+        const yourEmail = 'boboboborn1993@gmail.com'; 
         
-        const subject = 'Web制作のお見積もり依頼';
+        const subject = 'Web制作のお見積もり依頼（シミュレーション経由）';
         
         let body = 'YAMAMOTO CREATE様\n\n';
         body += 'Webサイト制作の件で、以下の内容にてお見積もりを希望します。\n\n';
@@ -116,19 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         body += '----------\n';
-        body += `■ 合計金額（税抜）: ¥${selectedItemsTotal.toLocaleString()}\n\n`;
-        body += '■ ご相談内容\n';
+        body += `■ 概算合計金額（税抜）: ¥${selectedItemsTotal.toLocaleString()}\n\n`;
+        body += '■ ご相談内容詳細\n';
         body += '（こちらに具体的なご相談内容をご記入ください）\n\n';
         body += '----------\n';
-        body += '■ 会社名・お名前：\n';
+        body += '■ 会社名／お名前：\n';
         body += '■ ご担当者様：\n';
-        body += '■ ご連絡先：\n';
+        body += '■ ご連絡先TEL：\n';
         body += '----------\n';
 
-        // Encode subject and body for the mailto link
         const mailtoLink = `mailto:${yourEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-        // Open the user's default email client
         window.location.href = mailtoLink;
     });
 
