@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const codingSubPages = document.getElementById('coding_sub_pages');
     const codingSubTotal = document.getElementById('coding_sub_total');
     const codingSubItem = document.getElementById('subpage_coding_item');
+
+    // --- Elements for Contact Modal ---
+    const contactModal = document.getElementById('contact-modal');
+    const contactForm = document.getElementById('contact-form');
+    const modalCancelButton = document.getElementById('modal-cancel-button');
+    const modalSubmitButton = document.getElementById('modal-submit-button');
+
     
     // --- Function to update sub-total for dropdown items ---
     function updateSubTotal(selectElement, totalElement) {
@@ -74,8 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateTotal();
     });
 
-    // --- CTA button ---
+    // --- Modal Handling ---
+    // Open modal when CTA button is clicked
     ctaButton.addEventListener('click', () => {
+        contactModal.classList.remove('hidden');
+    });
+
+    // Close modal when cancel button is clicked or outside area is clicked
+    modalCancelButton.addEventListener('click', () => {
+        contactModal.classList.add('hidden');
+    });
+    contactModal.addEventListener('click', (e) => {
+        if (e.target === contactModal) {
+            contactModal.classList.add('hidden');
+        }
+    });
+
+    // --- Form submission to generate mailto link ---
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent actual form submission
+
         // !!! IMPORTANT: Change this to your actual email address !!!
         const yourEmail = 'boboboborn1993@gmail.com'; 
         
@@ -83,8 +108,25 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let body = 'YAMAMOTO CREATE様\n\n';
         body += 'Webサイト制作の件で、以下の内容にてお見積もりを希望します。\n\n';
-        body += '----------\n';
-        body += '■ 選択した項目\n';
+        
+        // Append customer info from modal
+        const customerName = document.getElementById('customer_name').value;
+        const customerContactPerson = document.getElementById('customer_contact_person').value;
+        const customerTel = document.getElementById('customer_tel').value;
+        const customerEmail = document.getElementById('customer_email').value;
+        const customerDetails = document.getElementById('customer_details').value;
+
+        body += '---------- [お客様情報] ----------\n';
+        body += `■ 会社名／お名前： ${customerName}\n`;
+        if (customerContactPerson) {
+            body += `■ ご担当者様： ${customerContactPerson}\n`;
+        }
+        body += `■ ご連絡先TEL： ${customerTel}\n`;
+        body += `■ メールアドレス： ${customerEmail}\n`;
+        body += '-------------------------------------\n\n';
+        
+        // Append selected items
+        body += '---------- [選択した項目] ----------\n';
         body += '・基本料金（¥80,000）\n';
 
         let selectedItemsTotal = 80000;
@@ -112,18 +154,25 @@ document.addEventListener('DOMContentLoaded', () => {
             body += `・下層ページコーディング（${pages}ページ）（¥${price.toLocaleString()}）\n`;
         }
 
-        body += '----------\n';
+        body += '-------------------------------------\n\n';
         body += `■ 概算合計金額（税抜）: ¥${selectedItemsTotal.toLocaleString()}\n\n`;
-        body += '■ ご相談内容詳細\n';
-        body += '（こちらに具体的なご相談内容をご記入ください）\n\n';
-        body += '----------\n';
-        body += '■ 会社名／お名前：\n';
-        body += '■ ご担当者様：\n';
-        body += '■ ご連絡先TEL：\n';
-        body += '----------\n';
+        
+        // Append details from textarea
+        if(customerDetails){
+             body += '---------- [ご相談内容詳細] ----------\n';
+             body += `${customerDetails}\n`;
+             body += '-------------------------------------\n\n';
+        } else {
+             body += '■ ご相談内容詳細\n';
+             body += '（こちらに具体的なご相談内容をご記入ください）\n\n';
+        }
+
 
         const mailtoLink = `mailto:${yourEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = mailtoLink;
+
+        // Hide modal after creating mail link
+        contactModal.classList.add('hidden');
     });
 
     // --- Initial calculation on page load ---

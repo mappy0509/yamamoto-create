@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>yamamoto create | Portfolio</title>
     
-    <!-- External CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,24 +12,19 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased">
 
-    <!-- Loading Animation -->
     <div id="loader" class="fixed inset-0 bg-white z-[100] flex items-center justify-center">
         <div id="loader-bar-container">
             <div id="loader-bar"></div>
         </div>
     </div>
 
-    <!-- Header will be loaded here by common.js -->
     <header id="main-header" class="w-full sticky top-0 z-50"></header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="relative -mt-[68px] h-screen flex items-center justify-center bg-gray-800 text-white text-center" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto-format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed;">
             <div class="absolute inset-0 bg-black/50"></div>
             <div class="relative z-10 px-6">
@@ -43,12 +37,10 @@
         </section>
 
 
-        <!-- Works Section -->
         <section id="works" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-center" data-aos="fade-up">WORKS</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                    <!-- Project 1 -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up">
                         <img src="img/dunks-screenshot1.png" alt="選手＆コーチ向けスキルアップアプリのサムネイル" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
@@ -58,7 +50,6 @@
                              <a href="work-dunks-app.html" class="inline-block mt-5 text-center bg-gray-800 text-white font-bold text-xs tracking-wider py-2 px-5 rounded-full hover:bg-gray-700 transition-colors">詳細を見る</a>
                         </div>
                     </div>
-                    <!-- Project 2 -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="100">
                         <img src="img/salon-screenshot1.png" alt="AIチャット搭載 顧客向けアプリのサムネイル" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
@@ -68,7 +59,6 @@
                              <a href="work-salon-app.html" class="inline-block mt-5 text-center bg-gray-800 text-white font-bold text-xs tracking-wider py-2 px-5 rounded-full hover:bg-gray-700 transition-colors">詳細を見る</a>
                         </div>
                     </div>
-                    <!-- Project 3 -->
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="200">
                         <img src="img/website-screenshot1.png" alt="ミニバスチーム公式サイトのサムネイル" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
@@ -82,7 +72,6 @@
             </div>
         </section>
 
-        <!-- News Section -->
         <section id="news" class="py-20 bg-gray-50">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-center" data-aos="fade-up">NEWS</h2>
@@ -92,7 +81,6 @@
             </div>
         </section>
 
-        <!-- Profile Section -->
         <section id="profile" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-center" data-aos="fade-up">PROFILE</h2>
@@ -113,7 +101,6 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
         <section id="skills" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="section-title text-center" data-aos="fade-up">SKILLS</h2>
@@ -128,7 +115,18 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <section id="price" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title text-center" data-aos="fade-up">PRICE</h2>
+                <p class="max-w-xl mx-auto text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    ご希望の制作内容を選択するだけで、<br class="md:hidden">その場ですぐに概算費用をご確認いただけます。
+                </p>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <a href="price.html" class="inline-block bg-gray-800 text-white font-bold tracking-wider py-3 px-8 rounded-full hover:bg-gray-700 transition-colors duration-300">料金シミュレーションへ</a>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="py-20 bg-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="section-title text-center" data-aos="fade-up">CONTACT</h2>
@@ -143,15 +141,11 @@
         </section>
     </main>
 
-    <!-- Footer and Chatbot will be loaded here by common.js -->
     <footer id="footer-container"></footer>
     
-    <!-- External JS Libraries -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     
-    <!-- Your Custom Scripts (as modules) -->
     <script type="module" src="main.js"></script>
     <script src="common.js" defer></script>
 </body>
 </html>
-
